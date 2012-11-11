@@ -7,6 +7,7 @@
 #include "uj.h"
 
 
+extern const UjNativeClass nativeCls_UC;
 
 
 UInt8 ujReadClassByte(UInt32 userData, UInt32 offset){
@@ -54,6 +55,7 @@ int main(int argc, char** argv){
 	Boolean remaining;
 	UInt8 ret;
 	struct UjClass* mainClass = NULL;
+	struct UjClass* objectClass;
 	int i;
 	
 	if(argc == 1){
@@ -62,12 +64,17 @@ int main(int argc, char** argv){
 		return -1;
 	}
 	
-	ret = ujInit(NULL);
+	ret = ujInit(&objectClass);
 	if(ret != UJ_ERR_NONE){
 		fprintf(stderr, "ujInit() fail\n");
 		return -1;	
 	}
-	
+
+	ret = ujRegisterNativeClass(&nativeCls_UC, objectClass, NULL);
+	if(ret != UJ_ERR_NONE){
+		ujLog("ujRegisterNativeClass() fail\n");
+		return -1;
+	}
 	//load provided classes now
 	
 	argc--;
@@ -142,3 +149,30 @@ int main(int argc, char** argv){
 	
 	return 0;
 }
+
+static UInt8 natUc_logln(struct UjThread* t, _UNUSED_ struct UjClass* cls){
+	
+        printf("%d", ujThreadPop(t));
+
+        return UJ_ERR_NONE;
+}
+
+const UjNativeClass nativeCls_UC =
+	{
+		"UC",
+		0,
+		0,
+		NULL,
+		NULL,
+
+		1
+
+		,{
+			{
+				"logln",
+				"(I)V",
+				natUc_logln,
+				JAVA_ACC_PUBLIC | JAVA_ACC_NATIVE | JAVA_ACC_STATIC
+			}
+		}
+	};

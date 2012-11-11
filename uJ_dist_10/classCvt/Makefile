@@ -37,8 +37,8 @@ bb.o: bb.c bb.h
 clean:
 	rm -f $(APP) *.o *.class *.ujc
 
-test: $(APP)
-	./$(APP) < ../uJ/Test.class > Test.ujc
+test: $(APP1)
+	./$(APP1) < ../uJ/Test.class > Test.ujc
 	cat Test.ujc | wc
 	cat ../uJ/Test.class | wc
 

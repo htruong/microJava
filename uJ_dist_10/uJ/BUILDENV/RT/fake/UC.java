@@ -42,4 +42,9 @@ public class UC{
 //raw memory access
 	public static byte rawMemRead(int addr){return 0;}
 	public static void rawMemWrite(int addr, byte val){}
+
+//test func
+	public static void logln(int i){}
+	
+
 }

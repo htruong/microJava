@@ -156,13 +156,13 @@ clean:
 
 test: $(APP)
 	make -C BUILDENV CLASS=Test BUILD=just_filelist OUTPUT=filelist.txt
-	time -p ./$(APP) `cat filelist.txt`
+	./$(APP) `cat filelist.txt`
 
 test2: $(APP)
 	make -C BUILDENV CLASS=Test BUILD=just_filelist OUTPUT=filelist.txt SKIPSELF=yes
 	../classCvt/classCvt < Test.class > Test.ujc
 	rm Test.class
-	time -p ./$(APP) Test.ujc `cat filelist.txt`
+	./$(APP) Test.ujc `cat filelist.txt`
 
 RT:
 	make -C BUILDENV rtclean
