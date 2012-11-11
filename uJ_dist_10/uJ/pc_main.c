@@ -152,7 +152,7 @@ int main(int argc, char** argv){
 
 static UInt8 natUc_logln(struct UjThread* t, _UNUSED_ struct UjClass* cls){
 	
-        printf("%d", ujThreadPop(t));
+        printf("LOG: %d\n", ujThreadPop(t));
 
         return UJ_ERR_NONE;
 }
@@ -165,7 +165,7 @@ const UjNativeClass nativeCls_UC =
 		NULL,
 		NULL,
 
-		1
+		1 // Don't know what the hell this is
 
 		,{
 			{
