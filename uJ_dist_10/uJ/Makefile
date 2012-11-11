@@ -16,7 +16,7 @@ BUILD	?= PC
 
 
 #VM optimizations
-VMOPTS		= -DUJ_OPT_CLASS_SEARCH -DUJ_FTR_SYNCHRONIZATION -DUJ_FTR_STRING_FEATURES
+VMOPTS		= -DUJ_OPT_CLASS_SEARCH -DUJ_FTR_SYNCHRONIZATION -DUJ_FTR_STRING_FEATURES -DUJ_FTR_SUPPORT_FLOAT
 
 
 APP	= uJ
@@ -34,8 +34,8 @@ ifeq ($(BUILD), PC)
 	DOUBLE_SRC	= double64_soft.c
 	CPU		= X86
 	BOARD		= PC
-	CC	= gcc
-	LD	= gcc
+	CC	= clang
+	LD	= clang
 
 else ifeq ($(BUILD), avr)
 

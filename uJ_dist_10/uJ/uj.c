@@ -24,8 +24,8 @@
 		return ((*rep & 0x7F00) == 0x7F00);
 	}
 	#else
-		double floor(double);
-		#define floorf floor
+		//double floor(double x);
+		//float floorf(float x);
 	#endif
 #endif
 
